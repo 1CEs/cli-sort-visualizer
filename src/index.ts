@@ -3,7 +3,7 @@ import { Sort } from "./utils/sort";
 
 
 (async () => {
-    const data = generateRandomArray(Math.floor(Math.random() * 25))
+    const data = generateRandomArray(10)
     const sort = new Sort(data)
-    await sort.bubble()
+    await sort.selection()
 })();
