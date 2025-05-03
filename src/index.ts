@@ -19,7 +19,10 @@ const askQuestion = (question: string, color: keyof typeof chalk): Promise<strin
     const arrayLength = parseInt(await askQuestion("Enter array length (Default = 10):", "green")) || 10
     const minValue = parseInt(await askQuestion("Enter minimum value (Default = 1):", "yellow")) || 1
     const maxValue = parseInt(await askQuestion("Enter maximum value (Default = 50):", "red")) || 50
-    const sortType = await askQuestion("Choose sorting algorithm (bubble/selection) (Default = selection):", "magenta") || "selection"
+
+    console.log("Sorting algorithm \n#1.bubble\n#2.selection\n#3.insertion\n(Default = bubble)")
+
+    const sortNumber = await askQuestion("Enter number:", "magenta") || 1
     const delay = parseInt(await askQuestion("Enter visualization delay in seconds (Default = 1):", "cyan")) || 1
 
     console.log(chalk.green("\n✅ Configuration completed. Starting visualization..."))
@@ -28,9 +31,18 @@ const askQuestion = (question: string, color: keyof typeof chalk): Promise<strin
     const data = generateRandomArray(arrayLength, minValue, maxValue)
     const sort = new Sort(data)
     
-    if (sortType.toLowerCase() === "bubble") {
-        await sort.bubble()
-    } else {
-        await sort.selection()
+    switch(Number(sortNumber)){
+        case 1:
+            await sort.bubble()
+            break
+        case 2:
+            await sort.selection()
+            break
+        case 3:
+            await sort.insertion()
+            break
+        default:
+            console.log("Error: Please re-select sorting algorithms")
+            break 
     }
 })();
